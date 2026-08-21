@@ -1,0 +1,20 @@
+Proceso  TotalCompra
+	
+	Definir precio Como Real
+	Definir cantidad Como Real
+	Definir total Como Real
+	Definir totaldescuento Como Real
+	
+	
+	Escribir "Ingrese precio del producto "
+	Leer precio
+	Escribir "Ingrese cantidad del producto"
+	Leer cantidad
+	
+	total <- precio*cantidad	
+	Escribir "total de la compra: ",total
+	
+	totaldescuento <- total * 0.90
+	Escribir "total de la compra con descuento: ",totaldescuento
+	
+FinAlgoritmo
