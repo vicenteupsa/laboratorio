@@ -1,0 +1,20 @@
+Proceso  AreaRectangulo
+	
+	Definir base Como Real
+	Definir altura Como Real
+	Definir area Como Real
+	
+	Escribir "Ingrese base del rectangulo"
+	Leer base
+	Escribir "Ingrese altura del rectangulo"
+	Leer altura
+	
+	area <- base*altura
+	
+	Escribir "La base es: ",base
+	Escribir "La altura es: ",altura
+	Escribir "area del rectangulo: ",area
+	
+	
+FinAlgoritmo
+
