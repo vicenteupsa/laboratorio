@@ -1,0 +1,45 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+int main(){
+    
+    string nombre;
+    double m3, tarifa, total;
+    
+    cout <<"Ingrese su nombre: " ;
+    getline(cin, nombre);
+    
+    cout <<"ingrese su consumo: " ;
+    cin >> m3;
+    
+    if (m3>=0 && m3<=15){
+        tarifa = 1.2 ;
+        cout << "Consumo Minimo";
+    }
+    else if (m3>15 && m3<=35){
+        tarifa = 2.5 ;
+        cout << "Consumo Domestico";
+    }
+    else if (m3>35 && m3<=70){
+        tarifa = 4 ;
+        cout << "Consumo Comercial";
+    }
+    else if (m3>70){
+        tarifa = 6.5 ;
+        cout << "Consumo Industrial";
+    }
+    else {
+        cout << "El consumo debe ser positivo";
+        return 1;
+    }
+    
+    
+    total = 10 + (m3 * tarifa);
+    
+    cout << "Monto a Pagar:" <<total;
+    
+
+    return 0;
+}
