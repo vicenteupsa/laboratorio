@@ -1,0 +1,131 @@
+/*1. Enunciado del Ejercicio
+Una microempresa de envíos y encomiendas necesita un 
+sistema en consola para calcular el costo de transporte 
+de paquetes según el destino dentro del país (Bolivia). 
+El menú debe repetirse mediante un bucle do-while hasta 
+que el usuario decida salir.
+
+Tabla de Tarifas por Destino
+Opción (char)	Destino	            Tarifa Base	    Precio por Kg extra (> 2 Kg)
+L	            La Paz / El Alto	Bs 7.00	        Bs 3.00 / Kg extra
+C	            Cochabamba	        Bs 5.00	        Bs 2.00 / Kg extra
+S           	Santa Cruz	        Bs 8.00	        Bs 4.00 / Kg extra
+X           	Salir del sistema	—	—
+
+*/
+
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    char opcion;
+    double tarifaBase, precioKgExtra, kg, total, totalcondescuento;
+    
+    do {
+        cout << "\n========================================\n";
+        cout << "   SISTEMA DE ENVIOS Y ENCOMIENDAS (BOLIVIA)\n";
+        cout << "========================================\n";
+        cout << " [L] La Paz / El Alto\n";
+        cout << " [C] Cochabamba\n";
+        cout << " [S] Santa Cruz\n";
+        cout << " [X] Salir del sistema\n";
+        cout << "----------------------------------------\n";
+        cout << "Ingrese la opcion de destino: ";
+        cin >> opcion;
+        
+        switch (opcion) {
+            case 'L':
+            case 'l':
+                tarifaBase = 7.00;
+                precioKgExtra = 3.00;
+                
+                cout <<"----Envio a La Paz ----" << endl;
+                cout <<"Ingrese la cantidad de kg: "<< endl ;
+                cin >> kg ;
+                
+                if (kg <= 0) {
+                    cout <<"Error, debe ingresar un peso mayor a 0" << endl ;
+                } else if (kg > 0 && kg < 2){
+                    total = tarifaBase;
+                    cout <<"Monto total a pagar: "<<total<<endl ;
+                }
+                else {
+                    total = tarifaBase + (precioKgExtra*kg),
+                    cout <<"Monto total a pagar: "<<total<<endl ;
+                    
+                if(total>100){
+                    totalcondescuento=total*0.9;
+                    
+                    cout<<"Monto total a pagar con descuento: "<<totalcondescuento ;
+                    
+                }
+                }
+                
+                break;
+            case 'C':
+            case 'c':
+                tarifaBase = 5.00;
+                precioKgExtra = 2.00;
+                
+                cout <<"----Envio a Cochabamba ----" << endl;
+                cout <<"Ingrese la cantidad de kg: "<< endl ;
+                cin >> kg ;
+                
+                if (kg <= 0) {
+                    cout <<"Error, debe ingresar un peso mayor a 0" << endl ;
+                } else if (kg > 0 && kg < 2){
+                    total = tarifaBase ;
+                    cout <<"Monto total a pagar: "<<total<<endl ;
+                }else {
+                    total = tarifaBase + (precioKgExtra*kg),
+                    cout <<"Monto total a pagar: "<<total<<endl ;
+                    if(total>100){
+                    totalcondescuento=total*0.9;
+                    
+                    cout<<"Monto total a pagar con descuento: "<<totalcondescuento ;
+                    
+                }
+                }
+                break;
+            case 'S':
+            case 's':
+                tarifaBase = 8.00;
+                precioKgExtra = 4.00;
+                
+                cout <<"----Envio a Santa Cruz ----" << endl;
+                cout <<"Ingrese la cantidad de kg: " << endl;
+                cin >> kg ;
+                
+                if (kg <= 0) {
+                    cout <<"Error, debe ingresar un peso mayor a 0" << endl ;
+                } else if (kg > 0 && kg < 2){
+                    total = tarifaBase ;
+                    cout <<"Monto total a pagar: "<<total<<endl ;
+                }else {
+                    total = tarifaBase + (precioKgExtra*kg),
+                    cout <<"Monto total a pagar: "<<total<<endl ;
+                    if(total>100){
+                    totalcondescuento=total*0.9;
+                    
+                    cout<<"Monto total a pagar con descuento: "<<totalcondescuento ;
+                    
+                }
+                }
+                break;
+            case 'X':
+            case 'x':
+                cout << "\n Saliendo del programa.\n";
+                break;
+                
+            default:
+                cout << "\n Opcion no valida. Intente de nuevo.\n";
+                continue;
+        }
+        
+    } while (opcion != 'X' && opcion != 'x');
+
+    return 0;
+    
+}
