@@ -1,0 +1,25 @@
+1. Desarrollar un programa en C++ que solicite un número entero positivo N y calcule la suma de la siguiente serie:
+
+#include <iostream>
+using namespace std;
+
+int main(){
+    
+    int i;
+    double N, suma=0;
+    
+    cout<<"Ingrese un N entero positivo" << endl;
+    cin>> N ;
+    
+    if(N<0){
+        cout << "Ingrese un N correcto" << endl;
+        
+        return 1;
+    }
+    
+    for(i=1; i<=N; i++){
+        suma = suma + (1.0/i);
+    }
+    cout << "la suma total es igual a: " << suma << endl;
+    return 0;
+}
