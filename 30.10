@@ -1,0 +1,89 @@
+#include <iostream>
+
+using namespace std;
+
+const int MAX_ELEMENTOS = 100;
+
+int leerCantidad(int n);
+void registrarVector(double vec[], int n);
+double calcularPromedio(const double vec[], int n);
+double obtenerMayor(const double vec[], int n);
+double obtenerMenor(const double vec[], int n);
+void mostrarResultados(const double vec[], int n, double promedio, double mayor, double menor);
+
+int main() {
+    double vec[MAX_ELEMENTOS];
+    int n;
+
+    n = leerCantidad(n);
+    registrarVector(vec, n);
+
+    double promedio = calcularPromedio(vec, n);
+    double mayor = obtenerMayor(vec, n);
+    double menor = obtenerMenor(vec, n);
+
+    mostrarResultados(vec, n, promedio, mayor, menor);
+
+    return 0;
+}
+
+int leerCantidad(int n) {
+    do {
+        cout << "Ingrese la cantidad de estudiantes: ";
+        cin >> n;
+        if (n < 1 || n > MAX_ELEMENTOS) {
+            cout << "Error: La cantidad debe estar entre 1 y 100. Intente de nuevo.\n";
+        }
+    } while (n < 1 || n > MAX_ELEMENTOS);
+    return n;
+}
+
+void registrarVector(double vec[], int n) {
+    for (int i = 0; i < n; i++) {
+        do {
+            cout << "Nota estudiante " << (i + 1) << ": ";
+            cin >> vec[i];
+            if (vec[i] < 0 || vec[i] > 100) {
+                cout << "Error: La nota debe estar entre 0 y 100. Intente de nuevo.\n";
+            }
+        } while (vec[i] < 0 || vec[i] > 100);
+    }
+}
+
+double calcularPromedio(const double vec[], int n) {
+    double suma = 0;
+    for (int i = 0; i < n; i++) {
+        suma += vec[i];
+    }
+    return suma / n;
+}
+
+double obtenerMayor(const double vec[], int n) {
+    double mayor = vec[0];
+    for (int i = 1; i < n; i++) {
+        if (vec[i] > mayor) {
+            mayor = vec[i];
+        }
+    }
+    return mayor;
+}
+
+double obtenerMenor(const double vec[], int n) {
+    double menor = vec[0];
+    for (int i = 1; i < n; i++) {
+        if (vec[i] < menor) {
+            menor = vec[i];
+        }
+    }
+    return menor;
+}
+
+void mostrarResultados(const double vec[], int n, double promedio, double mayor, double menor) {
+    cout << "\nNOTAS REGISTRADAS\n";
+    for (int i = 0; i < n; i++) {
+        cout << vec[i] << "  ";
+    }
+    cout << "\n\nPromedio general: " << promedio << endl;
+    cout << "Nota mayor: " << mayor << endl;
+    cout << "Nota menor: " << menor << endl;
+}
