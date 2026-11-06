@@ -1,0 +1,255 @@
+#include <iostream>
+#include <iomanip>
+using namespace std;
+
+void mostrarMenu();
+void ejecutarMenu();
+
+void registrarCalificaciones(int calificaciones[], int &n);
+void mostrarCalificaciones(int calificaciones[], int n);
+
+float calcularPromedio(int calificaciones[], int n);
+void mayorMenor(int calificaciones[], int n, int &mayor, int &menor);
+
+int contarAprobados(int calificaciones[], int n);
+int contarReprobados(int calificaciones[], int n);
+int buscarCalificacion(int calificaciones[], int n, int valor);
+
+void actualizarCalificacion(int calificaciones[], int n);
+void reporteGeneral(int calificaciones[], int n);
+
+int main() {
+    ejecutarMenu();
+    return 0;
+}
+
+void mostrarMenu() {
+    cout << "\n=====================================\n";
+    cout << "   SISTEMA DE CALIFICACIONES - UNIVERSIDAD\n";
+    cout << "=====================================\n";
+    cout << "1. Registrar calificaciones\n";
+    cout << "2. Mostrar calificaciones\n";
+    cout << "3. Calcular promedio general\n";
+    cout << "4. Mostrar nota mayor y menor\n";
+    cout << "5. Mostrar aprobados y reprobados\n";
+    cout << "6. Buscar una calificacion\n";
+    cout << "7. Actualizar una calificacion\n";
+    cout << "8. Mostrar reporte general\n";
+    cout << "0. Salir\n";
+    cout << "=====================================\n";
+}
+
+void ejecutarMenu() {
+    int calificaciones[30];
+    int n = 0;
+    int opcion;
+    int posicion;
+    int mayor, menor;
+    int valor;
+
+    cout << fixed << setprecision(2);
+
+    do {
+        mostrarMenu();
+
+        cout << "Seleccione una opcion: ";
+        cin >> opcion;
+
+        if (opcion >= 2 && opcion <= 8 && n == 0) {
+            cout << "\nPrimero debe registrar las calificaciones.\n";
+            continue;
+        }
+
+        switch (opcion) {
+            case 1:
+                registrarCalificaciones(calificaciones, n);
+                break;
+
+            case 2:
+                mostrarCalificaciones(calificaciones, n);
+                break;
+
+            case 3:
+                cout << "\nPromedio general: " << calcularPromedio(calificaciones, n) << endl;
+                break;
+
+            case 4:
+                mayorMenor(calificaciones, n, mayor, menor);
+                cout << "\nNota mayor: " << mayor;
+                cout << "\nNota menor: " << menor << endl;
+                break;
+
+            case 5:
+                cout << "\nEstudiantes aprobados (>= 51): " << contarAprobados(calificaciones, n);
+                cout << "\nEstudiantes reprobados (< 51): " << contarReprobados(calificaciones, n) << endl;
+                break;
+
+            case 6:
+                cout << "\nIngrese la calificacion a buscar: ";
+                cin >> valor;
+
+                posicion = buscarCalificacion(calificaciones, n, valor);
+
+                if (posicion == -1) {
+                    cout << "Calificacion no encontrada.\n";
+                } else {
+                    cout << "Calificacion encontrada en el Estudiante " << posicion + 1 << endl;
+                }
+                break;
+
+            case 7:
+                actualizarCalificacion(calificaciones, n);
+                break;
+
+            case 8:
+                reporteGeneral(calificaciones, n);
+                break;
+
+            case 0:
+                cout << "\nGracias por utilizar el sistema.\n";
+                break;
+
+            default:
+                cout << "\nOpcion incorrecta.\n";
+        }
+
+        cout << endl;
+
+    } while (opcion != 0);
+}
+
+void registrarCalificaciones(int calificaciones[], int &n) {
+    do {
+        cout << "\nIngrese la cantidad de estudiantes (1-30): ";
+        cin >> n;
+
+        if (n < 1 || n > 30) {
+            cout << "Cantidad incorrecta. Debe estar entre 1 y 30.\n";
+        }
+
+    } while (n < 1 || n > 30);
+
+    for (int i = 0; i < n; i++) {
+        do {
+            cout << "Nota del estudiante " << i + 1 << ": ";
+            cin >> calificaciones[i];
+
+            if (calificaciones[i] < 0 || calificaciones[i] > 100) {
+                cout << "Calificacion invalida. Debe estar entre 0 y 100.\n";
+            }
+
+        } while (calificaciones[i] < 0 || calificaciones[i] > 100);
+    }
+
+    cout << "\nCalificaciones registradas correctamente.\n";
+}
+
+void mostrarCalificaciones(int calificaciones[], int n) {
+    cout << "\n----- CALIFICACIONES REGISTRADAS -----\n";
+
+    for (int i = 0; i < n; i++) {
+        cout << "Estudiante " << i + 1 << ": " << calificaciones[i] << endl;
+    }
+}
+
+float calcularPromedio(int calificaciones[], int n) {
+    if (n == 0) return 0.0f;
+    int suma = 0;
+    for (int i = 0; i < n; i++) {
+        suma += calificaciones[i];
+    }
+    return (float)suma / n;
+}
+
+void mayorMenor(int calificaciones[], int n, int &mayor, int &menor) {
+    if (n <= 0) return;
+    mayor = calificaciones[0];
+    menor = calificaciones[0];
+
+    for (int i = 1; i < n; i++) {
+        if (calificaciones[i] > mayor) {
+            mayor = calificaciones[i];
+        }
+        if (calificaciones[i] < menor) {
+            menor = calificaciones[i];
+        }
+    }
+}
+
+int contarAprobados(int calificaciones[], int n) {
+    int contador = 0;
+    for (int i = 0; i < n; i++) {
+        if (calificaciones[i] >= 51) {
+            contador++;
+        }
+    }
+    return contador;
+}
+
+int contarReprobados(int calificaciones[], int n) {
+    int contador = 0;
+    for (int i = 0; i < n; i++) {
+        if (calificaciones[i] < 51) {
+            contador++;
+        }
+    }
+    return contador;
+}
+
+int buscarCalificacion(int calificaciones[], int n, int valor) {
+    for (int i = 0; i < n; i++) {
+        if (calificaciones[i] == valor) {
+            return i;
+        }
+    }
+    return -1;
+}
+
+void actualizarCalificacion(int calificaciones[], int n) {
+    int estudiante;
+    int nuevaNota;
+
+    do {
+        cout << "\nIngrese el numero de estudiante a modificar (1-" << n << "): ";
+        cin >> estudiante;
+
+        if (estudiante < 1 || estudiante > n) {
+            cout << "Numero de estudiante incorrecto o fuera de rango.\n";
+        }
+
+    } while (estudiante < 1 || estudiante > n);
+
+    do {
+        cout << "Ingrese la nueva nota (0-100): ";
+        cin >> nuevaNota;
+
+        if (nuevaNota < 0 || nuevaNota > 100) {
+            cout << "Calificacion invalida. Debe estar entre 0 y 100.\n";
+        }
+
+    } while (nuevaNota < 0 || nuevaNota > 100);
+
+    calificaciones[estudiante - 1] = nuevaNota;
+
+    cout << "\nCalificacion actualizada correctamente.\n";
+    
+    mostrarCalificaciones(calificaciones, n);
+    cout << "Nuevo promedio: " << calcularPromedio(calificaciones, n) << endl;
+}
+
+void reporteGeneral(int calificaciones[], int n) {
+    int mayor, menor;
+
+    cout << "\n========== REPORTE GENERAL ==========\n";
+    mostrarCalificaciones(calificaciones, n);
+
+    cout << "\nPromedio general: " << calcularPromedio(calificaciones, n);
+
+    mayorMenor(calificaciones, n, mayor, menor);
+    cout << "\nNota mayor: " << mayor;
+    cout << "\nNota menor: " << menor;
+
+    cout << "\nAprobados (>= 51): " << contarAprobados(calificaciones, n);
+    cout << "\nReprobados (< 51): " << contarReprobados(calificaciones, n);
+    cout << "\n=====================================\n";
+}
