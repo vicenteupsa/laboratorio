@@ -1,0 +1,46 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+    void registrar(string &nombre, string &apellido);
+    string unirNombre(string nombre, string apellido);
+    int contarCaracteres(string nombre, string apellido);
+    void mostrar(string completo, int cantidad);
+
+int main() {
+    string nombre, apellido, completo;
+    int cantidad;
+
+    registrar(nombre, apellido);
+    completo = unirNombre(nombre, apellido);
+    cantidad = contarCaracteres(nombre, apellido);
+    mostrar(completo, cantidad);
+
+    return 0;
+}
+
+    void registrar(string &nombre, string &apellido) {
+        cout << "Ingrese el nombre del estudiante: ";
+        getline(cin, nombre);
+
+        cout << "Ingrese el apellido del estudiante: ";
+        getline(cin, apellido);
+    }
+
+    string unirNombre(string nombre, string apellido) {
+        string completo;
+        completo = nombre + " " + apellido;
+        return completo;
+    }
+
+    int contarCaracteres(string nombre, string apellido) {
+        int total;
+        total = nombre.length() + apellido.length();
+        return total;
+    }
+
+    void mostrar(string completo, int cantidad) {
+        cout << "Datos del estudiante"<<endl;
+        cout << "Nombre completo: " << completo<<endl;
+        cout << "Cantidad de letras: " << cantidad;
+    }
